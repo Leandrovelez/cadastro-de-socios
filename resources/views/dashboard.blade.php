@@ -36,7 +36,17 @@
                         @forelse($partners as $partner)
                         <tr>
                             <td>{{$partner->name}}</td>
-                            <td>{{$partner->type}}</td>
+                            <td>
+                                @if($partner->type == "Gold") 
+                                <small class="m-1 d-inline-flex mb-3 px-2 py-1 fw-semibold text-warning bg-warning bg-opacity-10 border border-warning border-opacity-10 rounded-2">
+                                    {{ $partner->type }}
+                                </small> 
+                                @else
+                                    <small class="m-1 d-inline-flex mb-3 px-2 py-1 fw-semibold text-secondary bg-secondary bg-opacity-10 border border-secondary border-opacity-10 rounded-2">
+                                        {{ $partner->type }}
+                                    </small> 
+                                @endif  
+                            </td>
                             <td>{{$partner->cpf}}</td>
                             <td>{{$partner->cep}}</td>
                             <td>{{$partner->state}}</td>

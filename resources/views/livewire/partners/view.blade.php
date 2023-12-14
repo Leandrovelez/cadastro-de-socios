@@ -14,10 +14,22 @@
                     <div class="col-2 text-start">
                         <p>Nome:</p><br>
                         <p>E-mail:</p><br>
+                        <p>Tipo:</p><br>
                     </div>
                     <div class="col-6 text-start">
                         <p>{{ $partner->name }}</p><br>
                         <p>{{ $partner->email }}</p><br>
+                        <p>
+                           @if($partner->type == "Gold") 
+                            <small class="m-1 d-inline-flex mb-3 px-2 py-1 fw-semibold text-warning bg-warning bg-opacity-10 border border-warning border-opacity-10 rounded-2">
+                                {{ $partner->type }}
+                            </small> 
+                            @else
+                                <small class="m-1 d-inline-flex mb-3 px-2 py-1 fw-semibold text-secondary bg-secondary bg-opacity-10 border border-secondary border-opacity-10 rounded-2">
+                                    {{ $partner->type }}
+                                </small> 
+                            @endif                            
+                        </p><br>
                     </div>
                 </div>
                 <h3>Endereço</h3>

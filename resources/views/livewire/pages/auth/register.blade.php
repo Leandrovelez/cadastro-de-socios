@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<div class="dark:bg-gray-800">
     <form wire:submit="register">
         <!-- Name -->
         <div>
