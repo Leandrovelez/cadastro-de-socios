@@ -37,6 +37,7 @@
                     <div class="col-4">
                     </div>
                     <div class="col-2 text-start">
+                        <p>CEP:</p><br>
                         <p>Estado:</p><br>
                         <p>Cidade:</p><br>
                         <p>Bairro:</p><br>
@@ -45,6 +46,7 @@
                         <p>Complemento:</p><br>
                     </div>
                     <div class="col-6 text-start">
+                    <p>{{ $partner->cep }}</p><br>
                     <p>{{ $partner->state }}</p><br>
                     <p>{{ $partner->city }}</p><br>
                     <p>{{ $partner->neighborhood }}</p><br>

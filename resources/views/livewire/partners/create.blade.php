@@ -25,7 +25,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 mb-4">
                         <div class="col-auto">
                             <label for="Type" class="col-form-label">Tipo:</label>
                             <select name="type" id="Type" class="form-select" aria-label="Default select example">
@@ -37,16 +37,16 @@
                                 <small class="text-danger">{{ $errors->first('type') }}</small>
                             @endif
                         </div>
-                        <div class="col-auto">
+                        <div class="col-2">
                             <label for="CPF" class="col-form-label">CPF:</label>
-                            <input type="text" name="cpf" id="CPF" class="form-control" value="{{ old('cpf') }}" placeholder="***.***.***-**" aria-label="CPF" aria-describedby="addon-wrapping">
+                            <input type="text" name="cpf" id="CPF" class="form-control" value="{{ old('cpf') }}" aria-label="CPF" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('cpf') }}</small>
                             @endif
                         </div>
                         <div class="col-auto">
                             <label for="CEP" class="col-form-label">CEP:</label>
-                            <input type="text" name="cep" id="CEP" class="form-control" value="{{ old('cep') }}" placeholder="****-***" aria-label="CEP" aria-describedby="addon-wrapping">
+                            <input type="text" name="cep" id="CEP" class="form-control" value="{{ old('cep') }}" aria-label="CEP" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('cep') }}</small>
                             @endif
@@ -77,8 +77,6 @@
                                 <small class="text-danger">{{ $errors->first('neighborhood') }}</small>
                             @endif
                         </div>
-                    </div>
-                    <div class="row mb-4 mt-2">
                         <div class="col-auto">
                             <label for="Address" class="col-form-label">Endereco:</label>
                             <input type="text" name="address" id="Address" class="form-control" value="{{ old('address') }}" aria-label="Address" aria-describedby="addon-wrapping">
@@ -101,9 +99,9 @@
                             @endif
                         </div>
                     </div>
-                    <button class="btn btn-success">Salvar</button>
+                    <button class="btn btn-primary">Salvar</button>
                     <a href="{{ route('dashboard') }}">
-                        <div class="btn btn-primary">Voltar</div>
+                        <div class="btn btn-danger">Cancelar</div>
                     </a>
                 </form>
             </div>
