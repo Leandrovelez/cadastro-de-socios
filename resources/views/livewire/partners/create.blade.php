@@ -12,14 +12,14 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="Name" class="col-form-label">Nome:</label>
-                            <input type="text" name="name" id="Name" class="form-control" placeholder="Nome" value="{{ old('name') }}" aria-label="Nome" aria-describedby="addon-wrapping">
+                            <input type="text" name="name" id="Name" class="form-control" value="{{ old('name') }}" aria-label="Nome" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('name') }}</small>
                             @endif
                         </div>
                         <div class="col-6">
                             <label for="Email" class="col-form-label">E-mail:</label>
-                            <input type="text" name="email" id="Email" class="form-control" placeholder="E-mail" value="{{ old('email') }}" aria-label="Email" aria-describedby="addon-wrapping">
+                            <input type="text" name="email" id="Email" class="form-control" value="{{ old('email') }}" aria-label="Email" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('email') }}</small>
                             @endif
