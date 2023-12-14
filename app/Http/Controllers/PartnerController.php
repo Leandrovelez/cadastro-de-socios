@@ -33,9 +33,7 @@ class PartnerController extends Controller
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_URL, 'viacep.com.br/ws/'.$cep.'/json/');
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "x-rapidapi-key:".env('API_FOOTBAL_KEY'),  
-            "x-rapidapi-host: viacep.com.br", 
+            "Content-Type: application/json"
         ));
 
         $data = json_decode(curl_exec($ch));
@@ -47,7 +45,7 @@ class PartnerController extends Controller
             $response['data'] = $data;
         } else {
             $response['success'] = false;
-            $response['data'] = "Erro ao buscar o CEP";
+            $response['data'] = "Nenhum endereço encontrado para o CEP informado";
         }
         return response()->json($response);       
     }
