@@ -20,7 +20,7 @@
                         <h1 class="card-title">Lista de sócios</h1>
                     </div>
                     <div class="col-4">
-                        <a href="{{ route('partners.create') }}" class="float-end">
+                        <a href="{{ route('create') }}" class="float-end">
                             <div class="btn btn-primary mt-2">Adicionar</div>
                         </a>
                     </div>
@@ -48,7 +48,7 @@
                             <td>{{$partner->state}}</td>
                             <td>{{$partner->city}}</td>
                             <td>
-                                <a href="{{route('partners.edit', $partner->id)}}" class="text-decoration-none">
+                                <a href="{{route('edit', $partner->id)}}" class="text-decoration-none">
                                     <div class="btn btn-primary" title="editar">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </div>
@@ -127,7 +127,7 @@
             var button = $(event.relatedTarget);
             var idUsuario = button.data('id');
             var partner = button.data('partner');
-            var rota = "{{ route('partners.delete', 0) }}"
+            var rota = "{{ route('delete', 0) }}"
             rota = rota.replace('/0', '/'+idUsuario)
             
             $('#deleteConfirm').attr("data-rota", rota );

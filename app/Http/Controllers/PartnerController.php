@@ -12,27 +12,60 @@ class PartnerController extends Controller
     public function index(){
         $partners = Partner::paginate(15);
 
-        return view('partners.index', compact('partners'));
+        return view('dashboard', compact('partners'));
+    }
+
+    public function view($id){
+        $partner = Partner::find($id);
+
+        return view('livewire.partners.view', compact('partner'));
     }
 
     public function create(){
-        return view('partners.create');
+        return view('livewire.partners.create');
     }    
+
+    public function searchCep($cep){
+        $cep = trim(str_replace('-', '', $cep));
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_URL, 'viacep.com.br/ws/'.$cep.'/json/');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "x-rapidapi-key:".env('API_FOOTBAL_KEY'),  
+            "x-rapidapi-host: viacep.com.br", 
+        ));
+
+        $data = json_decode(curl_exec($ch));
+        curl_close($ch);
+        
+        $response = [];
+        if($data){
+            $response['success'] = true;
+            $response['data'] = $data;
+        } else {
+            $response['success'] = false;
+            $response['data'] = "Erro ao buscar o CEP";
+        }
+        return response()->json($response);       
+    }
 
     public function store(PartnerRequest $request){
         $partner = Partner::create($request->except('_token'));
 
         if($partner){
-            return redirect()->route('partners.index')->with('alert-success','Sócio adicionado com sucesso');
+            return redirect()->route('dashboard')->with('alert-success','Sócio adicionado com sucesso');
         } else {
-            return redirect()->route('partners.index')->withError('Erro ao adicionar sócio');
+            return redirect()->route('dashboard')->withError('Erro ao adicionar sócio');
         }      
     }
 
     public function edit($id){
         $partner = Partner::find($id);
 
-        return view('partners.edit', compact('partner'));
+        return view('livewire.partners.edit', compact('partner'));
     }
 
     public function update($id, PartnerRequest $request){
@@ -48,13 +81,13 @@ class PartnerController extends Controller
                     'city' => $request->city,
                     'address' => $request->address,
                     'number' => $request->number,
-                    'complement' => $request->complement,
+                    'complement' => $request->complement ? $request->complement : null ,
                 ]);
 
         if($partner){
-            return redirect()->route('partners.index')->with('alert-success','Sócio atualizado com sucesso');
+            return redirect()->route('dashboard')->with('alert-success','Sócio atualizado com sucesso');
         } else {
-            return redirect()->route('partners.index')->withError('Erro ao atualizar o sócio');
+            return redirect()->route('dashboard')->withError('Erro ao atualizar o sócio');
         }  
     }
 

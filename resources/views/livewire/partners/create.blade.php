@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de sócio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <!-- Toastr CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
-
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
-    
-</head>
-<body>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Adicionar sócio
+        </h2>
+    </x-slot>
     <div class="container justify-content-center">
         <div class="card justify-content-center mt-4 mb-4 rounded">
             <div class="card-body bg-light">
-                <h1 class="card-title">Adicionar sócio</h1>
-                <form method="POST" action="{{ route('partners.store') }}" class="text-secondary">
+                <form method="POST" action="{{ route('store') }}" class="text-secondary">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -67,44 +53,56 @@
                         </div>
                         <div class="col-auto">
                             <label for="State" class="col-form-label">Estado:</label>
-                            <input type="text" name="state" id="State" class="form-control" value="{{ old('state') }}" placeholder="****-***" aria-label="State" aria-describedby="addon-wrapping">
+                            @if(isset($response))
+
+                            <input type="text" name="state" id="State" class="form-control" value="{{ $response->uf }}" aria-label="State" aria-describedby="addon-wrapping">
+                            @else
+                            <input type="text" name="state" id="State" class="form-control" value="{{ old('state') }}" aria-label="State" aria-describedby="addon-wrapping">
+                            @endif
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('state') }}</small>
                             @endif
                         </div>
                         <div class="col-auto">
                             <label for="City" class="col-form-label">Cidade:</label>
-                            <input type="text" name="city" id="City" class="form-control" value="{{ old('city') }}" placeholder="****-***" aria-label="City" aria-describedby="addon-wrapping">
+                            <input type="text" name="city" id="City" class="form-control" value="{{ old('city') }}" aria-label="City" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('city') }}</small>
                             @endif
                         </div>
                         <div class="col-auto">
-                            <label for="Number" class="col-form-label">Numero:</label>
-                            <input type="text" name="number" id="Number" class="form-control" value="{{ old('number') }}" placeholder="****-***" aria-label="Number" aria-describedby="addon-wrapping">
+                            <label for="Neighborhood" class="col-form-label">Bairro:</label>
+                            <input type="text" name="neighborhood" id="Neighborhood" class="form-control" value="{{ old('neighborhood') }}" aria-label="City" aria-describedby="addon-wrapping">
                             @if ($errors->any())
-                                <small class="text-danger">{{ $errors->first('number') }}</small>
+                                <small class="text-danger">{{ $errors->first('neighborhood') }}</small>
                             @endif
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-4 mt-2">
                         <div class="col-auto">
                             <label for="Address" class="col-form-label">Endereco:</label>
-                            <input type="text" name="address" id="Address" class="form-control" value="{{ old('address') }}" placeholder="****-***" aria-label="Address" aria-describedby="addon-wrapping">
+                            <input type="text" name="address" id="Address" class="form-control" value="{{ old('address') }}" aria-label="Address" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('address') }}</small>
                             @endif
                         </div>
                         <div class="col-auto">
                             <label for="Complement" class="col-form-label">Complemento:</label>
-                            <input type="text" name="complement" id="Complement" class="form-control" value="{{ old('complement') }}" placeholder="****-***" aria-label="Complement" aria-describedby="addon-wrapping">
+                            <input type="text" name="complement" id="Complement" class="form-control" value="{{ old('complement') }}" aria-label="Complement" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('complement') }}</small>
                             @endif
                         </div>
+                        <div class="col-auto">
+                            <label for="Number" class="col-form-label">Numero:</label>
+                            <input type="text" name="number" id="Number" class="form-control" value="{{ old('number') }}" aria-label="Number" aria-describedby="addon-wrapping">
+                            @if ($errors->any())
+                                <small class="text-danger">{{ $errors->first('number') }}</small>
+                            @endif
+                        </div>
                     </div>
                     <button class="btn btn-success">Salvar</button>
-                    <a href="{{ route('partners.index') }}">
+                    <a href="{{ route('dashboard') }}">
                         <div class="btn btn-primary">Voltar</div>
                     </a>
                 </form>
@@ -138,9 +136,35 @@
             @elseif(Session::has('message'))
                 toastr.warning('{{ Session::get('message') }}');
             @endif
+           
+            
+            $("#CEP").focusout(function (event) {
+            var input = $('#CEP');
+            var cep = input.val();
+            var rota = "{{ route('search_cep', 0) }}"
+            rota = rota.replace('/0', '/'+cep)
+
+            $.ajax({
+            type: "GET",
+            url: rota,
+            encode: true,
+            }).done(function (response) {
+                if (!response.success) {
+                    toastr.error(response.data)
+                } else {
+                    $('#CEP').val(response.data.cep)
+                    $('#State').val(response.data.uf)
+                    $('#City').val(response.data.localidade)
+                    $('#Address').val(response.data.logradouro)
+                    $('#Neighborhood').val(response.data.bairro)
+                }
+            })
+
+            event.preventDefault();
+        });
+
         });
 
 
     </script>
-</body>
-</html>
+</x-app-layout>
