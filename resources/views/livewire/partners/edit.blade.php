@@ -80,17 +80,17 @@
                             @endif
                         </div>
                         <div class="col-auto">
-                            <label for="Complement" class="col-form-label">Complemento:</label>
-                            <input type="text" name="complement" id="Complement" class="form-control" placeholder="****-***" value="{{ $partner->complement }}" aria-label="Complement" aria-describedby="addon-wrapping">
-                            @if ($errors->any())
-                                <small class="text-danger">{{ $errors->first('complement') }}</small>
-                            @endif
-                        </div>
-                        <div class="col-auto">
                             <label for="Number" class="col-form-label">Numero:</label>
                             <input type="text" name="number" id="Number" class="form-control" placeholder="****-***" value="{{ $partner->number }}" aria-label="Number" aria-describedby="addon-wrapping">
                             @if ($errors->any())
                                 <small class="text-danger">{{ $errors->first('number') }}</small>
+                            @endif
+                        </div>
+                        <div class="col-auto">
+                            <label for="Complement" class="col-form-label">Complemento:</label>
+                            <input type="text" name="complement" id="Complement" class="form-control" placeholder="****-***" value="{{ $partner->complement }}" aria-label="Complement" aria-describedby="addon-wrapping">
+                            @if ($errors->any())
+                                <small class="text-danger">{{ $errors->first('complement') }}</small>
                             @endif
                         </div>
                     </div>
